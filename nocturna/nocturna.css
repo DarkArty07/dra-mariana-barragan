@@ -1,0 +1,101 @@
+/* Versión nocturna: se carga después de style.css (página de Dot, sin cambios).
+   Portada, franja de cédulas, contacto, ubicación y pie en pizarra con acentos cobre, como la
+   tarjeta 02. Isotipo, nombre e iconos son los de su tarjeta, en SVG. */
+:root {
+  --noche: #2b4c5a;           /* papel pizarra de la tarjeta 02 */
+  --noche-profunda: #1c3540;
+  --crema: #f7ebde;           /* marfil de su tarjeta */
+  --crema-suave: rgba(247, 235, 222, .78);
+  --cobre-tarjeta: #b38563;   /* su cobre */
+  --cobre-claro: #d9ae8a;     /* cobre legible sobre pizarra para texto pequeño */
+  --linea-noche: rgba(247, 235, 222, .14);
+}
+
+/* Barra superior y encabezado */
+.topbar { background: #172d36; color: var(--crema); }
+header { background: rgba(28, 53, 64, .97); border-bottom: 1px solid var(--linea-noche); }
+nav { color: var(--crema); background: transparent; }
+nav > a:hover { color: var(--cobre-claro); }
+header .button.compact { background: #c99a75; border-color: #c99a75; color: var(--noche-profunda); }
+header .button.compact:hover { background: var(--cobre-claro); color: var(--noche-profunda); }
+.menu-toggle { background: transparent; border-color: var(--linea-noche); color: var(--crema); }
+
+.brand-noche { display: flex; align-items: center; gap: 14px; }
+.brand .brand-noche .brand-iso { width: 56px; height: auto; flex-shrink: 0; }
+.brand .brand-noche .brand-nombre { width: 220px; height: auto; }
+footer .brand .brand-noche .brand-iso { width: 50px; }
+footer .brand .brand-noche .brand-nombre { width: 200px; }
+
+/* Portada */
+.hero {
+  background:
+    radial-gradient(900px 520px at 82% 42%, rgba(201, 154, 117, .13), transparent 62%),
+    var(--noche) url("fondo-pizarra.webp") center / cover;
+  color: var(--crema);
+  border-bottom: 0;
+}
+.hero-wordmark { margin: 0 0 26px; }
+.hero-wordmark img { display: block; width: min(440px, 100%); height: auto; }
+.hero-copy h1 { color: var(--crema); }
+.doctor-name { color: var(--cobre-claro); }
+.lead { color: var(--crema-suave); }
+.hero .button { background: #c99a75; border-color: #c99a75; color: var(--noche-profunda); }
+.hero .button:hover { background: var(--cobre-claro); color: var(--noche-profunda); }
+.hero .button.secondary { background: transparent; color: var(--crema); border-color: rgba(247, 235, 222, .5); }
+.hero .button.secondary:hover { background: rgba(247, 235, 222, .08); color: var(--crema); }
+.hero-note small { color: var(--crema-suave); }
+.plus { background: rgba(247, 235, 222, .1); color: var(--cobre-claro); }
+.portrait > img { box-shadow: 0 0 0 1px rgba(217, 174, 138, .35), 0 30px 60px rgba(10, 22, 28, .35); }
+.portrait figcaption { color: var(--crema-suave); }
+.portrait-card { background: var(--noche-profunda); color: var(--crema); border-left-color: var(--cobre-tarjeta); box-shadow: 0 14px 34px rgba(10, 22, 28, .4); }
+.portrait-card small { color: var(--crema-suave); }
+.card-symbol { color: var(--cobre-claro); }
+
+/* Franja de cédulas: continúa la portada */
+.credentials-strip { background: var(--noche-profunda); border-bottom: 0; }
+.credentials-grid small { color: var(--cobre-claro); }
+.credentials-grid strong { color: var(--crema); }
+.credentials-grid span { color: var(--crema-suave); }
+.credentials-grid > div + div { border-color: var(--linea-noche); }
+
+/* Ubicación */
+.address-block { background: var(--noche-profunda); }
+.location-label { color: var(--cobre-claro); }
+.address-block address { color: var(--crema-suave); }
+.address-block .button.light, .contact .button.light { background: var(--crema); border-color: var(--crema); color: var(--noche-profunda); }
+.location-call { color: var(--crema); }
+
+/* Contacto */
+.contact { background: var(--noche) url("fondo-pizarra.webp") center / cover; color: var(--crema); }
+.contact .eyebrow { color: var(--cobre-claro); }
+.contact h2 { color: var(--crema); }
+.contact p { color: var(--crema-suave); }
+.contact .button { gap: 10px; }
+.contact .button img { width: 24px; height: 24px; }
+.contact-links > a.con-icono { display: inline-flex; align-items: center; gap: 12px; color: var(--crema); text-decoration: none; }
+.contact-links > a.con-icono:hover { color: var(--cobre-claro); }
+.con-icono img { width: 26px; height: 26px; flex-shrink: 0; }
+
+/* Pie a todo lo ancho (el footer de Dot es un .wrap) */
+html, body { overflow-x: clip; }
+footer { position: relative; isolation: isolate; color: var(--crema-suave); }
+footer::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--noche-profunda); z-index: -1; }
+.footer-main p, .footer-main > a:last-child, .footer-bottom, .disclaimer { color: var(--crema-suave); }
+.footer-bottom { border-top-color: var(--linea-noche); }
+
+/* Foco visible sobre fondo oscuro */
+header a:focus-visible, header button:focus-visible, .hero a:focus-visible, .contact a:focus-visible,
+.address-block a:focus-visible, footer a:focus-visible { outline-color: var(--cobre-claro); }
+
+@media (max-width: 820px) {
+  nav { background: var(--noche-profunda); box-shadow: 0 15px 20px rgba(10, 22, 28, .35); }
+}
+@media (max-width: 620px) {
+  .brand .brand-noche .brand-iso { width: 40px; }
+  .brand .brand-noche .brand-nombre { width: 158px; }
+  .brand-noche { gap: 10px; }
+  .hero-wordmark img { width: min(340px, 100%); }
+}
+@media (max-width: 360px) {
+  .brand .brand-noche .brand-nombre { width: 130px; }
+}
