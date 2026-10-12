@@ -1,0 +1,158 @@
+/* Página de contraste: se carga después de style.css (página de Dot, sin cambios).
+   Los dos colores de la tarjeta 08 Marino se alternan en bloques, como sus dos caras: marino con texto
+   crema y oro claro; marfil con tinta marino y su cobre. Isotipo, nombre e iconos son los de su tarjeta,
+   en SVG (generar_recursos.py). Si la doctora elige la tarjeta 10, cambian estas variables y los SVG. */
+:root {
+  --noche: #14273d;            /* marino de la tarjeta 08 */
+  --noche-profunda: #0e1c2c;
+  --crema: #f7ebde;            /* marfil de su tarjeta */
+  --crema-suave: rgba(247, 235, 222, .8);
+  --oro: #dfb98a;              /* oro claro: sólo sobre marino (8.3:1); sobre marfil sigue su cobre */
+  --oro-vivo: #e9c9a1;
+  --linea-noche: rgba(247, 235, 222, .16);
+  --ink: #14273d;              /* la tinta de los bloques claros pasa del pizarra al marino */
+}
+.button:hover { background: #1d3552; }
+
+/* Barra superior y encabezado */
+.topbar { background: var(--noche-profunda); color: var(--crema); }
+header { background: rgba(14, 28, 44, .97); border-bottom: 1px solid var(--linea-noche); }
+nav { color: var(--crema); background: transparent; }
+nav > a:hover { color: var(--oro); }
+header .button.compact { background: var(--oro); border-color: var(--oro); color: var(--noche-profunda); }
+header .button.compact:hover { background: var(--oro-vivo); color: var(--noche-profunda); }
+.menu-toggle { background: transparent; border-color: var(--linea-noche); color: var(--crema); }
+
+.brand-noche { display: flex; align-items: center; gap: 14px; }
+.brand .brand-noche .brand-iso { width: 56px; height: auto; flex-shrink: 0; }
+.brand .brand-noche .brand-nombre { width: 220px; height: auto; }
+footer .brand .brand-noche .brand-iso { width: 50px; }
+footer .brand .brand-noche .brand-nombre { width: 200px; }
+
+/* Portada */
+.hero {
+  background:
+    radial-gradient(900px 520px at 82% 42%, rgba(223, 185, 138, .12), transparent 62%),
+    var(--noche) url("fondo-marino.webp") center / cover;
+  color: var(--crema);
+  border-bottom: 0;
+}
+.hero-wordmark { margin: 0 0 26px; }
+.hero-wordmark img { display: block; width: min(440px, 100%); height: auto; }
+.hero-copy h1 { color: var(--crema); }
+.doctor-name { color: var(--oro); }
+.lead { color: var(--crema-suave); }
+.hero .button { background: var(--oro); border-color: var(--oro); color: var(--noche-profunda); }
+.hero .button:hover { background: var(--oro-vivo); color: var(--noche-profunda); }
+.hero .button.secondary { background: transparent; color: var(--crema); border-color: rgba(247, 235, 222, .5); }
+.hero .button.secondary:hover { background: rgba(247, 235, 222, .08); color: var(--crema); }
+.hero-note small { color: var(--crema-suave); }
+.plus { background: rgba(247, 235, 222, .1); color: var(--oro); }
+.portrait > img { box-shadow: 0 0 0 1px rgba(223, 185, 138, .35), 0 30px 60px rgba(5, 12, 20, .35); }
+.portrait figcaption { color: var(--crema-suave); }
+.portrait-card { background: var(--noche-profunda); color: var(--crema); border-left-color: var(--oro); box-shadow: 0 14px 34px rgba(5, 12, 20, .4); }
+.portrait-card small { color: var(--crema-suave); }
+.card-symbol { color: var(--oro); }
+
+/* Franja de cédulas: continúa la portada */
+.credentials-strip { background: var(--noche-profunda); border-bottom: 0; }
+.credentials-grid small { color: var(--oro); }
+.credentials-grid strong { color: var(--crema); }
+.credentials-grid span { color: var(--crema-suave); }
+.credentials-grid > div + div { border-color: var(--linea-noche); }
+
+/* Ubicación */
+.address-block { background: var(--noche-profunda); }
+.location-label { color: var(--oro); }
+.address-block address { color: var(--crema-suave); }
+.address-block .button.light, .contact .button.light { background: var(--crema); border-color: var(--crema); color: var(--noche-profunda); }
+.location-call { color: var(--crema); }
+
+/* Contacto */
+.contact { background: var(--noche) url("fondo-marino.webp") center / cover; color: var(--crema); }
+.contact .eyebrow { color: var(--oro); }
+.contact h2 { color: var(--crema); }
+.contact p { color: var(--crema-suave); }
+.contact .button { gap: 10px; }
+.contact .button img { width: 24px; height: 24px; }
+.contact-links > a.con-icono { display: inline-flex; align-items: center; gap: 12px; color: var(--crema); text-decoration: none; }
+.contact-links > a.con-icono:hover { color: var(--oro); }
+.con-icono img { width: 26px; height: 26px; flex-shrink: 0; }
+
+/* Pie a todo lo ancho (el footer de Dot es un .wrap) */
+html, body { overflow-x: clip; }
+footer { position: relative; isolation: isolate; color: var(--crema-suave); }
+footer::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--noche-profunda); z-index: -1; }
+.footer-main p, .footer-main > a:last-child, .footer-bottom, .disclaimer { color: var(--crema-suave); }
+.footer-bottom { border-top-color: var(--linea-noche); }
+
+/* Foco visible sobre fondo oscuro */
+header a:focus-visible, header button:focus-visible, .hero a:focus-visible, .contact a:focus-visible,
+.address-block a:focus-visible, footer a:focus-visible { outline-color: var(--oro); }
+
+@media (max-width: 950px) {  /* el menú de Dot se pliega a 950 px; la nocturna lo oscurecía sólo desde 820 */
+  nav { background: var(--noche-profunda); box-shadow: 0 15px 20px rgba(5, 12, 20, .35); }
+}
+@media (max-width: 620px) {
+  .brand .brand-noche .brand-iso { width: 40px; }
+  .brand .brand-noche .brand-nombre { width: 158px; }
+  .brand-noche { gap: 10px; }
+  .hero-wordmark img { width: min(340px, 100%); }
+}
+@media (max-width: 360px) {
+  .brand .brand-noche .brand-nombre { width: 130px; }
+}
+
+/* ---- Bloques marino intercalados: el ritmo de las dos caras de la tarjeta ---- */
+.minima, .galeria { background: var(--noche) url("fondo-marino.webp") center / cover; color: var(--crema); padding: 84px 0; }
+.minima .eyebrow, .galeria .eyebrow { color: var(--oro); text-transform: uppercase; letter-spacing: .11em; font-size: .8125rem; }
+.minima h2, .galeria h2 { color: var(--crema); }
+.minima a:focus-visible, .galeria a:focus-visible { outline-color: var(--oro); }
+
+/* Mínima invasión: sustituye a «La consulta, en números» */
+.minima h2 { max-width: 720px; }
+.minima-intro { color: var(--crema-suave); max-width: 720px; font-size: 1.1875rem; line-height: 1.8; margin-bottom: 44px; }
+.minima-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.minima-grid article { border-top: 2px solid var(--oro); padding-top: 22px; min-width: 0; }
+.minima-grid span { color: var(--oro); font-size: .9375rem; font-weight: 600; }
+.minima-grid h3 { font: 600 1.5rem/1.25 var(--sans); color: var(--crema); margin: 10px 0 12px; }
+.minima-grid p { color: var(--crema-suave); font-size: 1.0625rem; line-height: 1.75; margin: 0; }
+.minima-nota { margin: 34px 0 0; font-size: .8125rem; color: var(--oro); }
+
+/* Galería «Así trabaja» */
+.galeria .section-heading > p { color: var(--crema-suave); }
+.galeria-nota { font-size: .875rem; color: var(--oro); margin: 0 0 26px; }
+.galeria-rejilla { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.galeria-rejilla li { position: relative; aspect-ratio: 3 / 2; border-radius: 6px; overflow: hidden; background: var(--noche-profunda); min-width: 0; }
+.galeria-rejilla li:first-child { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+.galeria-rejilla a, .galeria-rejilla img { display: block; width: 100%; height: 100%; }
+.galeria-rejilla img { object-fit: cover; }
+.galeria-rejilla li > span { position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 14px 12px; font-size: .875rem; line-height: 1.4; color: var(--crema); background: linear-gradient(transparent, rgba(5, 12, 20, .78)); }
+.galeria-rejilla li > span small { display: block; margin-top: 2px; font-size: .75rem; color: var(--oro); }
+.galeria-rejilla .pendiente { border: 1px dashed rgba(223, 185, 138, .55); display: grid; place-items: center; text-align: center; }
+.galeria-rejilla .pendiente > span { position: static; background: none; padding: 16px; color: var(--crema-suave); }
+.galeria-visor { border: 0; padding: 0; background: var(--noche-profunda); color: var(--crema); max-width: min(1100px, 94vw); border-radius: 8px; }
+.galeria-visor::backdrop { background: rgba(5, 12, 20, .86); }
+.galeria-visor img { display: block; max-width: 100%; max-height: 78vh; margin: auto; }
+.galeria-visor p { margin: 0; padding: 12px 18px 16px; font-size: .9375rem; }
+.galeria-visor button { display: block; margin-left: auto; min-height: 44px; padding: 10px 16px; background: none; border: 0; color: var(--crema); font: inherit; cursor: pointer; }
+
+/* «Qué atiende»: su lista, y la nota de texto por validar de «Tu cirugía con tu seguro» */
+.atencion-lista { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 28px; font-size: 1.125rem; font-weight: 500; }
+.atencion-lista li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.preparation .draft-label { margin: 20px 0 0; }
+
+/* Barra fija de contacto, sólo en el teléfono */
+.barra-movil { display: none; }
+
+@media (max-width: 700px) {
+  .minima, .galeria { padding: 60px 0; }
+  .minima-grid { grid-template-columns: 1fr; gap: 26px; }
+  .atencion-lista { grid-template-columns: 1fr 1fr; gap: 0 18px; font-size: 1.0625rem; }
+  .galeria-rejilla { grid-template-columns: 1fr; gap: 12px; }
+  .galeria-rejilla li:first-child { grid-column: auto; grid-row: auto; aspect-ratio: 3 / 2; }
+  .barra-movil { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 5% calc(10px + env(safe-area-inset-bottom)); background: rgba(14, 28, 44, .97); border-top: 1px solid var(--linea-noche); }
+  .barra-movil .button { min-height: 48px; background: var(--oro); border-color: var(--oro); color: var(--noche-profunda); }
+  .barra-movil .button.secondary { background: transparent; color: var(--crema); border-color: rgba(247, 235, 222, .5); }
+  footer { padding-bottom: 84px; }
+}
