@@ -191,6 +191,8 @@ async function showSlide(index, focusLink = false) {
   if (focusLink) incoming.querySelector("a").focus({ preventScroll: true });
 }
 gallery.classList.add("gallery-enhanced");
+// El total sale de las fotografías que haya en el HTML: sirve igual con 3 que con 10.
+counter.textContent = `Imagen 1 de ${slides.length}`;
 stage.tabIndex = 0;
 stage.setAttribute("aria-roledescription", "carrusel de fotografías");
 controls.hidden = false;
@@ -207,3 +209,27 @@ stage.addEventListener("keydown", (event) => {
 reducedMotion.addEventListener("change", () => {
   if (reducedMotion.matches) finishGallery();
 });
+
+// Reels de Instagram: el script oficial se carga una sola vez y solo cuando la sección se acerca a la pantalla.
+// Si no hay ninguna incrustación en el HTML no se contacta a Instagram; el enlace de respaldo siempre funciona.
+const INSTAGRAM_EMBED = "https://www.instagram.com/embed.js";
+const videosSection = document.querySelector("#videos");
+let instagramRequested = false;
+function loadInstagramEmbeds() {
+  if (instagramRequested) return;
+  instagramRequested = true;
+  if (!videosSection.querySelector(".instagram-media")) return;
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = INSTAGRAM_EMBED;
+  script.addEventListener("load", () => window.instgrm?.Embeds.process());
+  document.head.append(script);
+}
+if (videosSection && "IntersectionObserver" in window) {
+  const videosObserver = new IntersectionObserver((entries) => {
+    if (!entries.some((entry) => entry.isIntersecting)) return;
+    videosObserver.disconnect();
+    loadInstagramEmbeds();
+  }, { rootMargin: "600px 0px" });
+  videosObserver.observe(videosSection);
+}
